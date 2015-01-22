@@ -2,6 +2,7 @@ using System;
 using System.Web;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
+using Ninject.Extensions.Conventions;
 using Ninject.Web.Common;
 using Timesheet.Micro;
 using Timesheet.Micro.Infrastructure.DependencyResolvers;
@@ -62,6 +63,8 @@ namespace Timesheet.Micro
         private static void RegisterServices(IKernel kernel)
         {
             System.Web.Mvc.DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+
+            kernel.Bind(x => x.FromThisAssembly().SelectAllClasses().BindDefaultInterface());
         }
     }
 }

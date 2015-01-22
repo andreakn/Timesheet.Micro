@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="no">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,42 @@
 
     @Styles.Render("~/bundles/styles")
 </head>
-<body>    
+<body>
+    <section id="logo" class="container">
+        <div class="row col-md-9">
+            <div class="col-md-4">
+                <img src="/Content/Images/forse_logo.png"/> <i>Timesheet</i>
+            </div>
+            <div class="col-md-2">
+                
+            </div>
+            <div class="col-md-2 pull-right">
+                @ViewBag.Username
+                [ @Html.ActionLink("Logg ut", "Logout", "Auth") ]
+            </div>
+        </div>
+    </section>
+
+    <div class="row">
+
+    </div>
+    <div class="row">
+
+
+        @if (!string.IsNullOrWhiteSpace("" + TempData["Error"]))
+        {
+            <div class="alert alert-danger">
+                <span>@Html.Raw(TempData["Error"])</span>
+            </div>
+        }
+        @if (!string.IsNullOrWhiteSpace("" + TempData["Info"]))
+        {
+            <div class="alert alert-success">
+                <span>@Html.Raw(TempData["Info"])</span>
+            </div>
+        }
+    </div>
+
     <div class="container body-content">
         @RenderBody()
     </div>

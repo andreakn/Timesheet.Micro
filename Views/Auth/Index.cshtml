@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm())
+{
+
+    <div class="input-group">
+        <label>brukernavn</label><input type="text" name="username" class="" />
+    </div>
+    <div class="input-group">
+        <label>Password</label><input type="password" name="password" class="" />
+    </div>
+    <div>
+        <input type="submit" value="Login"/>
+    </div>
+}

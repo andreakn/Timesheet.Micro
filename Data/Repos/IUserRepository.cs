@@ -6,5 +6,7 @@ namespace Timesheet.Micro.Data.Repos
     {
         User GetByUserName(string username);
         void Save(string username, string password);
+        bool UsernameExists(string username);
+        void Create(User user);
     }
 }

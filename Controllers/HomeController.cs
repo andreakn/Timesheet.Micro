@@ -6,16 +6,18 @@ namespace Timesheet.Micro.Controllers
     public class HomeController : Controller
     {
 
-        private UserRepo userRepo;
+        private UserRepository userRepo;
 
-        public HomeController(UserRepo userRepo)
+        public HomeController(UserRepository userRepo)
         {
             this.userRepo = userRepo;
         }
 
         public ActionResult Index()
         {
-            return View("Index",(object)userRepo.GetCurrentUser());
+            return View("Index", (object)Session["user"]);
         }
+
+
     }
 }

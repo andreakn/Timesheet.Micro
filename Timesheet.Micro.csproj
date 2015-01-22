@@ -40,6 +40,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.1.38\lib\net45\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Migrator">
       <HintPath>..\lib\Migrator.Net\Migrator.dll</HintPath>
@@ -53,6 +56,9 @@
     </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Conventions">
+      <HintPath>..\packages\Ninject.Extensions.Conventions.3.2.0.0\lib\net45-full\Ninject.Extensions.Conventions.dll</HintPath>
     </Reference>
     <Reference Include="Ninject.Web.Common">
       <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
@@ -137,8 +143,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Data\Migrations\M000_BaseMigration.cs" />
     <Compile Include="Data\Migrations\M001_TypeColumns.cs" />
     <Compile Include="Data\Migrations\M002_Users.cs" />
@@ -151,7 +160,8 @@
     <Compile Include="Data\Migrations\M009_StaffableProjectTypes.cs" />
     <Compile Include="Data\Migrations\M010_PublicHolidays.cs" />
     <Compile Include="Data\Migrations\M011_ProjectTimeRate.cs" />
-    <Compile Include="Data\Repos\UserRepo.cs" />
+    <Compile Include="Data\Repos\BaseRepo.cs" />
+    <Compile Include="Data\Repos\UserRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -207,6 +217,40 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\add.png" />
+    <Content Include="Content\Images\apply.png" />
+    <Content Include="Content\Images\asc.gif" />
+    <Content Include="Content\Images\back.png" />
+    <Content Include="Content\Images\background.png" />
+    <Content Include="Content\Images\black_background.png" />
+    <Content Include="Content\Images\button_bkr.png" />
+    <Content Include="Content\Images\button_bkr_over.png" />
+    <Content Include="Content\Images\calendar.png" />
+    <Content Include="Content\Images\closed.png" />
+    <Content Include="Content\Images\desc.gif" />
+    <Content Include="Content\Images\edit.png" />
+    <Content Include="Content\Images\faktura_bkr.png" />
+    <Content Include="Content\Images\forse_logo.png" />
+    <Content Include="Content\Images\giro_bg.png" />
+    <Content Include="Content\Images\header_bkr.png" />
+    <Content Include="Content\Images\info.png" />
+    <Content Include="Content\Images\lock.png" />
+    <Content Include="Content\Images\lock2.png" />
+    <Content Include="Content\Images\maximize.png" />
+    <Content Include="Content\Images\minimize.png" />
+    <Content Include="Content\Images\minus.png" />
+    <Content Include="Content\Images\open.png" />
+    <Content Include="Content\Images\plus.png" />
+    <Content Include="Content\Images\save.png" />
+    <Content Include="Content\Images\sortable.gif" />
+    <Content Include="Content\Images\submit_bkr.png" />
+    <Content Include="Content\Images\submit_bkr_over.png" />
+    <Content Include="Content\Images\timesheet.png" />
+    <Content Include="Content\Images\timesheet2.png" />
+    <Content Include="Content\Images\title_bkr.png" />
+    <Content Include="Content\Images\tooltip_bkr.png" />
+    <Content Include="Content\Images\user.png" />
+    <Content Include="Content\Images\warning.png" />
     <Content Include="Content\site.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -302,6 +346,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <Content Include="Views\Error\Http404.cshtml" />
+    <Content Include="Views\Auth\Index.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
