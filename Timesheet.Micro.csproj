@@ -15,7 +15,7 @@
     <AssemblyName>Timesheet.Micro</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -175,6 +175,7 @@
     <Compile Include="Data\Repos\IStaffingEntryRepository.cs" />
     <Compile Include="Data\Repos\ITimeEntryRepository.cs" />
     <Compile Include="Data\Repos\IUserRepository.cs" />
+    <Compile Include="Models\Constants.cs" />
     <Compile Include="Models\Domain\Model\Address.cs" />
     <Compile Include="Models\Domain\Model\AddressType.cs" />
     <Compile Include="Models\Domain\Model\AuditedPersistentObject.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Utils\ElmahHandleErrorAttribute.cs" />
     <Compile Include="Utils\NoCacheAttribute.cs" />
     <Compile Include="Utils\UserSessionAttribute.cs" />
+    <Compile Include="Views\Shared\Menu.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -346,7 +348,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <Content Include="Views\Error\Http404.cshtml" />
-    <Content Include="Views\Auth\Index.cshtml" />
+    <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
   </ItemGroup>
@@ -374,7 +376,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55097</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:55097/</IISUrl>
+          <IISUrl>http://localhost:333</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:333/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
