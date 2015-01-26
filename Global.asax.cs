@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -21,30 +22,46 @@ namespace Timesheet.Micro
         }
 
 
-        //protected void Application_AcquireRequestState()
-        //{
-        //    if (!HttpContext.Current.Request.Path.StartsWith("/Auth", StringComparison.InvariantCultureIgnoreCase))
-        //    {
-        //        var currentUser = Session[Constants.SESSIONKEY_USER] as User;
-        //        if (currentUser == null)
-        //        {
-        //            var username = System.Web.HttpContext.Current.User.Identity.Name;
-        //            var repo = DependencyResolver.Current.GetService<IUserRepository>();
-        //            if (repo.UsernameExists(username))
-        //            {
-        //                currentUser = repo.GetByUserName(username);
-        //                if (currentUser != null)
-        //                {
-        //                    Session[Constants.SESSIONKEY_USER] = currentUser;
-        //                }
-        //                else
-        //                {
-        //                    Response.Redirect("~/Auth");
-        //                }
-        //            }
-        //            Response.Redirect("~/Auth");
-        //        }
-        //    }
-        //}
+        protected void Application_AcquireRequestState()
+        {
+            RedirectToLoginIfNecessary();
+        }
+
+        private void RedirectToLoginIfNecessary()
+        {
+            var authFreeZones = new[] {"/Auth", "/Content", "/Scripts", "/fonts","/bundles"};
+            if (
+                authFreeZones.Any(
+                    z => HttpContext.Current.Request.Path.StartsWith(z, StringComparison.InvariantCultureIgnoreCase)))
+            {
+                return;
+            }
+
+
+            var username = System.Web.HttpContext.Current.User.Identity.Name;
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                Response.Redirect("~/Auth");
+                return;
+            }
+            var currentUser = Session[Constants.SESSIONKEY_USER] as User;
+            if (currentUser == null)
+            {
+                var repo = DependencyResolver.Current.GetService<IUserRepository>();
+                if (repo.UsernameExists(username))
+                {
+                    currentUser = repo.GetByUserName(username);
+                    if (currentUser != null)
+                    {
+                        Session[Constants.SESSIONKEY_USER] = currentUser;
+                    }
+                    else
+                    {
+                        Response.Redirect("~/Auth");
+                    }
+                }
+                Response.Redirect("~/Auth");
+            }
+        }
     }
 }

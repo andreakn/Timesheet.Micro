@@ -8,6 +8,6 @@ namespace Timesheet.Micro.Models.Services
         public string Username { get; set; }
         public string Fullname { get; set; }
         public int EmployeeId { get; set; }
-        public IEnumerable<Role> Roles { get; set; }
+        public RoleType Roles { get; set; }
     }
 }

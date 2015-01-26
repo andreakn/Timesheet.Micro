@@ -15,7 +15,7 @@ namespace Timesheet.Micro.Controllers
 
         public ActionResult Index()
         {
-            return View("Index", (object)Session["user"]);
+            return View("Index");
         }
 
 

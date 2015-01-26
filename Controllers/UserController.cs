@@ -47,7 +47,7 @@ namespace Timesheet.Micro.Controllers
             user.Username = username;
             user.PasswordSalt = _cryptographer.CreateSalt();
             user.PasswordHash = _cryptographer.GetPasswordHash(password, user.PasswordSalt);
-            _userRepository.Create(user);
+            _userRepository.Save(user);
             Info("Bruker opprettet");
             return RedirectToAction("Index", "Home");
         }

@@ -145,6 +145,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="Data\Migrations\M010_PublicHolidays.cs" />
     <Compile Include="Data\Migrations\M011_ProjectTimeRate.cs" />
     <Compile Include="Data\Repos\BaseRepo.cs" />
+    <Compile Include="Data\Repos\CustomerRepository.cs" />
     <Compile Include="Data\Repos\UserRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -168,22 +170,13 @@
     <Compile Include="Infrastructure\DependencyResolvers\NinjectDependencyResolver.cs" />
     <Compile Include="Data\Repos\ICustomerRepository.cs" />
     <Compile Include="Data\Repos\IEmployeeRepository.cs" />
-    <Compile Include="Data\Repos\IInvoiceRepository.cs" />
     <Compile Include="Data\Repos\IProjectRepository.cs" />
     <Compile Include="Data\Repos\IRepository.cs" />
-    <Compile Include="Data\Repos\IRoleRepository.cs" />
-    <Compile Include="Data\Repos\IStaffingEntryRepository.cs" />
     <Compile Include="Data\Repos\ITimeEntryRepository.cs" />
     <Compile Include="Data\Repos\IUserRepository.cs" />
     <Compile Include="Models\Constants.cs" />
-    <Compile Include="Models\Domain\Model\Address.cs" />
-    <Compile Include="Models\Domain\Model\AddressType.cs" />
-    <Compile Include="Models\Domain\Model\AuditedPersistentObject.cs" />
-    <Compile Include="Models\Domain\Model\Contact.cs" />
     <Compile Include="Models\Domain\Model\Customer.cs" />
     <Compile Include="Models\Domain\Model\Employee.cs" />
-    <Compile Include="Models\Domain\Model\EmployeeStaffingEntries.cs" />
-    <Compile Include="Models\Domain\Model\Invoice.cs" />
     <Compile Include="Models\Domain\Model\PersistentObject.cs" />
     <Compile Include="Models\Domain\Model\Project.cs" />
     <Compile Include="Models\Domain\Model\ProjectMember.cs" />
@@ -192,7 +185,6 @@
     <Compile Include="Models\Domain\Model\ProjectTimeEntries.cs" />
     <Compile Include="Models\Domain\Model\ProjectType.cs" />
     <Compile Include="Models\Domain\Model\Role.cs" />
-    <Compile Include="Models\Domain\Model\StaffingEntry.cs" />
     <Compile Include="Models\Domain\Model\TimeEntry.cs" />
     <Compile Include="Models\Domain\Model\User.cs" />
     <Compile Include="Models\Extensions\DateTimeHelper.cs" />
@@ -351,9 +343,11 @@
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Employee\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

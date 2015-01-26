@@ -5,8 +5,8 @@ namespace Timesheet.Micro.Data.Repos
 {
     public interface ICustomerRepository : IRepository<Customer>
     {
-        IEnumerable<Address> GetAddresses(Customer customer);
-        IEnumerable<AddressType> GetAddressTypes();
-        IEnumerable<Contact> GetContacts(Customer customer);
+        //IEnumerable<Address> GetAddresses(Customer customer);
+        //IEnumerable<AddressType> GetAddressTypes();
+        //IEnumerable<Contact> GetContacts(Customer customer);
     }
 }

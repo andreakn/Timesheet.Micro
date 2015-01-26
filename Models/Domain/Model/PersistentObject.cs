@@ -1,4 +1,6 @@
-﻿namespace Timesheet.Micro.Models.Domain.Model
+﻿using System.Collections.Generic;
+
+namespace Timesheet.Micro.Models.Domain.Model
 {
     public abstract class PersistentObject
     {
@@ -38,5 +40,7 @@
         {
             return !(obj1 == obj2);
         }
+
+        public abstract IEnumerable<string> FieldsToSave();
     }
 }

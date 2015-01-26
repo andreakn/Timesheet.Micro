@@ -1,11 +1,20 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Timesheet.Micro.Models.Domain.Model
 {
-    public class ProjectType : PersistentObject
+    public enum ProjectType
     {
-        public virtual string Name { get; set; }
-        public virtual IList<Project> Projects { get; set; }
-        public virtual bool IsStaffable { get; set; }
+        [Description("Internprosjekt")]
+        InternalProject = 1,
+
+        [Description("Løpende timer")]
+        HourlyBilled = 2,
+
+        [Description("Målpris")]
+        TargetPrice = 3,
+        
+        [Description("Fastpris")]
+        FixedPrice = 4
     }
 }
