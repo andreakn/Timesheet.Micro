@@ -51,5 +51,33 @@ namespace Timesheet.Micro.Controllers
             Info("Bruker opprettet");
             return RedirectToAction("Index", "Home");
         }
+
+        public ActionResult SetPassword(string username)
+        {
+            if (!_userRepository.UsernameExists(username))
+            {
+                Error("Ukjent bruker");
+                return RedirectToAction("Index");
+            }
+            var user = _userRepository.GetByUserName(username);
+            return View(user);
+        } 
+        
+        [HttpPost]
+        public ActionResult SetPassword(string username, string newPassword)
+        {
+            if (!_userRepository.UsernameExists(username))
+            {
+                Error("Ukjent bruker");
+                return RedirectToAction("Index");
+            }
+            var user = _userRepository.GetByUserName(username);
+            user.PasswordSalt = _cryptographer.CreateSalt();
+            user.PasswordHash = _cryptographer.GetPasswordHash(newPassword, user.PasswordSalt);
+            _userRepository.Save(user);
+            Info("Passord lagret");
+      
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace Timesheet.Micro.Models.Domain.Model
 
         public virtual int UserId { get; set; }
         public virtual int Roles { get; set; }
+        public virtual bool IsActive { get; set; }
         
         public virtual string FullName
         {
@@ -34,7 +35,7 @@ namespace Timesheet.Micro.Models.Domain.Model
 
         public override IEnumerable<string> FieldsToSave()
         {
-            return new[] { "FirstName", "LastName", "LastLockedHours", "StartDate", "EndDate", "UserId", "Roles" };
+            return new[] { "FirstName", "LastName", "LastLockedHours", "StartDate", "EndDate", "UserId", "Roles","IsActive" };
         }
     }
 }

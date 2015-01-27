@@ -5,13 +5,15 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
+using System.Web.SessionState;
 using Timesheet.Micro.Data.Repos;
 using Timesheet.Micro.Models;
 using Timesheet.Micro.Models.Domain.Model;
 
 namespace Timesheet.Micro
 {
-    public class MvcApplication : System.Web.HttpApplication
+
+    public class MvcApplication : System.Web.HttpApplication, IRequiresSessionState  
     {
         protected void Application_Start()
         {
@@ -22,14 +24,19 @@ namespace Timesheet.Micro
         }
 
 
-        protected void Application_AcquireRequestState()
+        protected void Application_PostAuthenticateRequest()
+        {
+            var duup = false;
+        }
+
+        protected void Application_PreRequestHandlerExecute()
         {
             RedirectToLoginIfNecessary();
         }
 
         private void RedirectToLoginIfNecessary()
         {
-            var authFreeZones = new[] {"/Auth", "/Content", "/Scripts", "/fonts","/bundles"};
+            var authFreeZones = new[] {"/Auth", "/Content", "/Scripts", "/fonts","/bundles","/_browserlink"};
             if (
                 authFreeZones.Any(
                     z => HttpContext.Current.Request.Path.StartsWith(z, StringComparison.InvariantCultureIgnoreCase)))
@@ -54,6 +61,7 @@ namespace Timesheet.Micro
                     if (currentUser != null)
                     {
                         Session[Constants.SESSIONKEY_USER] = currentUser;
+                        return;
                     }
                     else
                     {

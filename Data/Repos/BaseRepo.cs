@@ -21,15 +21,23 @@ namespace Timesheet.Micro.Data.Repos
             return new SqlConnection(ConfigurationManager.ConnectionStrings["TimesheetDB"].ConnectionString);
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             using (var conn = GetConn())
             {
                 return conn.Query<T>("select * from "+TableName);
             }
         }
+        
+        public virtual IEnumerable<T> GetAllActive()
+        {
+            using (var conn = GetConn())
+            {
+                return conn.Query<T>("select * from "+TableName+" where IsActive = 1");
+            }
+        }
 
-        public T GetById(int id)
+        public virtual T GetById(int id)
         {
             using (var conn = GetConn())
             {
@@ -37,13 +45,17 @@ namespace Timesheet.Micro.Data.Repos
             }
         }
 
-        public void Save(T entity)
+        public virtual void Save(T entity)
         {
             using (var conn = GetConn())
             {
                 if (entity.IsPersistent)
                 {
-                    conn.Execute( string.Format("update {0} ({1}) VALUES ({2}) where Id = @Id",TableName, GetColNames(entity), GetParams(entity)), entity);
+                    var list = entity.FieldsToSave().OrderBy(s => s);
+                    var listsql = string.Join(", ",list.Select(s => string.Format("{0} = @{0}", s)));
+
+
+                    conn.Execute( string.Format("UPDATE {0} SET {1} WHERE Id = @Id",TableName, listsql), entity);
                 }
                 else
                 {
@@ -64,7 +76,7 @@ namespace Timesheet.Micro.Data.Repos
             return string.Join(", ", list);
         }
 
-        public void Delete(T entity)
+        public virtual void Delete(T entity)
         {
             using (var conn = GetConn())
             {

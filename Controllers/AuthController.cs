@@ -36,17 +36,23 @@ namespace Timesheet.Micro.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
-            if(!string.IsNullOrWhiteSpace(password))
-            if (Authenticate(username, password))
+            if (!string.IsNullOrWhiteSpace(password))
             {
-                //log in user
-                FormsAuthentication.SetAuthCookie(username, true);
-
-                return RedirectToAction("Index", "Home");
+                if (Authenticate(username, password))
+                {
+                    //log in user
+                    FormsAuthentication.SetAuthCookie(username, true);
+                    Info("Logget inn som " + username);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    Error("Galt brukernavn eller passord");
+                }
             }
             else
             {
-                Error("Galt brukernavn eller passord");
+                Error("Du må skrive inn passord");
             }
             return View();
         }
